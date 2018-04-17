@@ -1,10 +1,11 @@
 CC=gcc
 INCLUDES=-ISDK:MUI/C/include
-OBJ=hellowinos4.o
 LIBS=-lauto -lm
+CFLAGS=-D__USE_INLINE__
+OBJ=hellowin.o
 
 %.o: %.c
-	$(CC) -c -o $@ $< $(INCLUDES)
+	$(CC) -c -o $@ $< $(INCLUDES) $(CFLAGS)
 
-hellowinos4: $(OBJ)
-	$(CC) -o helloswinos4 $(OBJ) $(LIBS)
+hellowin: $(OBJ)
+	$(CC) -o helloswin $(OBJ) $(LIBS) $(CFLAGS)
