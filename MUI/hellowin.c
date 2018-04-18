@@ -20,7 +20,7 @@ int init()
     if ((MUIMasterBase = (struct Library*)  OpenLibrary(MUIMASTER_NAME,MUIMASTER_VMIN)) == NULL)
     {
     	printf("Failed to open %s",MUIMASTER_NAME);
-   	return -1;
+		return -1;
     }
     
     // Access shared library interface
@@ -59,7 +59,7 @@ int main(int argc, char *argv[])
     {
 		cleanup(NULL);
 		return -1;
-	}			
+	}
     
 	app = ApplicationObject,
 			MUIA_Application_Title, "MUI Hello World OS4 Version",
@@ -69,21 +69,26 @@ int main(int argc, char *argv[])
                                 MUIA_Window_ID,MAKE_ID('H','E','L','L'),
                                 MUIA_Window_Activate, TRUE,
                                 WindowContents, VGroup,
-                                	Child, TextObject, MUIA_Text_Contents, "Hello World", End,
-                                End,
-                    End,
-				End;
+                                	Child, TextObject,
+										MUIA_Text_Contents, "Hello World from a MUI Window.\n"
+										"Close window or hit CTRL-C to exit.",
+										MUIA_Text_Copy, FALSE,
+										MUIA_Text_SetMax, TRUE,
+								End,
+							End,
+				End,
+			End;
  
-    if (app == NULL)
-    {
-       cleanup(NULL);
-       return -1;
-    }
+	if (app == NULL)
+	{
+		cleanup(NULL);
+		return -1;
+	}
     
 	IDoMethod(window,MUIM_Notify,MUIA_Window_CloseRequest,TRUE,
 		app,2,MUIM_Application_ReturnID,MUIV_Application_ReturnID_Quit);
 
-	SetAttrs(window,MUIA_Window_Open,TRUE);
+	set(window,MUIA_Window_Open,TRUE);
 
 	{
 		ULONG sigs = 0;
@@ -98,7 +103,7 @@ int main(int argc, char *argv[])
 		}
 	}
 
-	SetAttrs(window,MUIA_Window_Open,FALSE);
+	set(window,MUIA_Window_Open,FALSE);
 	cleanup(app);
 
 	return 0;

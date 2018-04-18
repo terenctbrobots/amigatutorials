@@ -8,4 +8,4 @@ OBJ=hellowin.o
 	$(CC) -c -o $@ $< $(INCLUDES) $(CFLAGS)
 
 hellowin: $(OBJ)
-	$(CC) -o helloswin $(OBJ) $(LIBS) $(CFLAGS)
+	$(CC) -o hellowin $(OBJ) $(LIBS) $(CFLAGS)
